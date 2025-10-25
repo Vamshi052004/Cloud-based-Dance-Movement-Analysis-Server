@@ -16,28 +16,24 @@ Dance Movement Analysis is a Flask-based web service that allows users to upload
 
 ## Project Structure
 dance-movement-analysis/
-│
 ├── app/
-| |___ sample_videos/
-      |__ sample_dance.mp4
-│ ├── app.py # Main Flask application
-│ ├── movement_analysis.py # Video processing and skeleton overlay logic
-│ ├── utils.py # Utility functions (file handling, paths)
-│ └── sample_videos/ # Sample videos for testing
-│
+│   ├── __init__.py
+│   ├── app.py                 # Main Flask application
+│   ├── movement_analysis.py   # Video processing and skeleton overlay logic
+│   ├── utils.py               # Utility functions (file handling, paths)
+│   └── sample_videos/
+│       └── sample_dance.mp4   # Sample videos for testing
 ├── config/
-│ └── settings.py # Project configuration and environment variables
-│
+│   └── settings.py            # Project configuration and environment variables
 ├── demo/
-│ ├── demo.mp4 # demo video of 2 minutes
-│
-├── tests/ # Unit tests for endpoints and video analysis
-|   |__ test_analyzer.py
-|   |__ test_movement.py
-├── requirements.txt # Python package dependencies
-├── Dockerfile # Docker setup for containerized deployment
-├── .gitignore # Ignored files and directories
-└── README.md # Project documentation
+│   └── demo.mp4               # Demo video of 2 minutes
+├── tests/
+│   ├── test_analyzer.py       # Unit tests for analyzer
+│   └── test_movement.py       # Unit tests for movement analysis
+├── requirements.txt           # Python package dependencies
+├── Dockerfile                 # Docker setup for containerized deployment
+├── .gitignore                 # Ignored files and directories
+└── README.md                  # Project documentation
 
 yaml
 Copy code
