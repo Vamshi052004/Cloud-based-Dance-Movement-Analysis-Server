@@ -1,0 +1,11 @@
+pycache/
+*.pyc
+*.pyo
+*.pyd
+tests/
+demo/
+data/
+*.mp4
+.vscode/
+.env
+.git/
