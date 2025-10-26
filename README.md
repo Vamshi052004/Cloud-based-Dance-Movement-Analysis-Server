@@ -35,112 +35,91 @@ dance-movement-analysis/
 ├── .gitignore                 # Ignored files and directories
 └── README.md                  # Project documentation
 
-yaml
-Copy code
-
----
-
 ## Quick Start (Local Setup)
 
 ### 1. Clone the repository
-```bash
-git clone <your-repo-url>
+git clone https://github.com/Vamshi052004/Cloud-based-Dance-Movement-Analysis-Server.git
 cd dance-movement-analysis
 
-# 2. Set up a Python virtual environment
-```bash
+### 2. Set up a Python virtual environment (optional)
 python -m venv .venv
-# Activate environment
-source .venv/bin/activate     # macOS/Linux
-.venv\Scripts\activate        # Windows
+# Activate the environment
+.venv\Scripts\activate 
 
-# 3. Install dependencies
-```bash
+### Install dependencies
 pip install --upgrade pip setuptools wheel
 pip install -r requirements.txt
 
-# 4. Run the Flask server
-```bash
+### 4. Run the Flask server
 python -m app.app
-The server runs by default on: http://127.0.0.1:5000.
+# The server will start at:
+http://127.0.0.1:5000
 
-# 5. Test upload and processing
-Use the /analyze endpoint to upload videos via POST.
+### 5. Test upload and processing
+# Use the /analyze endpoint to upload a video via POST request.
+curl -F "file=@app/sample_videos/sample_dance.mp4" http://localhost:5000/analyze
 
-Response JSON includes:
-```json
-{
-  "output_video": "processed_video.mp4",
-  "download_url": "/download/processed_video.mp4"
-}
-
-# Docker Setup
-1. Build Docker image
-```bash
+### 6. Docker Setup (Windows Local Test)
+# 6.1 Build Docker image
 docker build -t dance-analyzer .
 
-2. Run Docker container
-```bash
-docker run -p 5000:5000 \
-    -v $(pwd)/data/uploads:/data/uploads \
-    -v $(pwd)/data/outputs:/data/outputs \
-    dance-analyzer
-Port 5000 is exposed; upload and output directories are mounted for persistence.
+# 6.2 Run Docker container
+docker run -p 5000:5000 `
+-v ${PWD}/uploads:/app/uploads `
+-v ${PWD}/outputs:/app/outputs `
+  dance-analyzer
+# alternate command to run the Docker container (recommended)
+docker run dance-analyzer (simplier to execute)
 
-Environment Variables
-Variable	Description	Default
-UPLOAD_DIR	Directory to store uploaded videos	/data/uploads
-OUTPUT_DIR	Directory to store processed videos	/data/outputs
+### 7. Cloud Deployment (Ubuntu on AWS / GCP)
+# 7.1 Update system and install Docker
+sudo apt update
+sudo apt install -y docker.io
+sudo systemctl enable docker
+sudo systemctl start docker
+sudo usermod -aG docker $USER
 
-# Testing
-The project includes unit tests for both the Flask endpoints and video processing functions.
+# 7.2 check the docker version
+docker --version
+# 7.3 Clone/copy the repository from the github
+git clone https://github.com/Vamshi052004/Cloud-based-Dance-Movement-Analysis-Server.git
 
-Run all tests with:
-```bash
-pytest
-or 
+# 7.4 Build Docker image on Ubuntu
+cd dance-movement-analysis
+sudo docker build -t dance-analyzer .
+
+# 7.5 If any issue occur while building the docker image (Optional if no issues occured)
+df -h
+sudo docker system prune -a
+sudo docker system df
+sudo apt-get clean
+sudo rm -rf /var/lib/apt/lists/*
+sudo journalctl --vacuum-time=1d
+# rerun the docker image build command after this
+
+
+# 7.6 Run container on cloud
+sudo docker run -d -p 5000:5000 \
+  -v $(pwd)/uploads:/app/uploads \
+  -v $(pwd)/outputs:/app/outputs \
+  dance-analyzer
+(or) alternate one
+docker run -p 5000:5000 dance-analyzer # (recommended)
+
+### Install curl in Ubuntu
+sudo apt update
+sudo apt install -y curl
+
+### Access the deployed API
+curl -X POST http://<EC2-IP>:5000/analyze \
+  -F "file=@sample_videos/sample_dance.mp4" \
+  --output result.mp4
+
+### Testing
+# Unit tests are provided for video analysis and API endpoints.
 python -m pytest -v
-Ensures that uploads, analysis, and video output work correctly.
 
-Deployment
-Suitable for deployment on VPS or cloud services (AWS EC2, GCP Compute Engine, DigitalOcean, etc.).
 
-Ensure port 5000 is open, or configure Nginx with TLS for secure production deployment.
-
-Docker simplifies deployment, avoids dependency conflicts, and ensures reproducibility.
-
-Usage Example
-Upload Video
-```bash
-curl -X POST http://127.0.0.1:5000/analyze \
-  -F "file=@/path/to/sample_dance.mp4"
-
-Response in json format
-{
-  "output_video": "sample_dance_processed.mp4",
-  "download_url": "/download/sample_dance_processed.mp4"
-}
-Download Video
-Open in browser or use curl:
-
-```bash
-curl -O http://127.0.0.1:5000/download/sample_dance_processed.mp4
-Contributing
-Fork the repository.
-
-Create a feature branch:
-
-bash
-git checkout -b feature/my-feature
-Commit changes:
-
-bash
-git commit -m "Add feature"
-Push branch:
-
-bash
-git push origin feature/my-feature
-Open a pull request.
 
 License
 This project is licensed under the MIT License. See LICENSE for details.
