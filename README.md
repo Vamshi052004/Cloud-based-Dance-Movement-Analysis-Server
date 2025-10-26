@@ -117,7 +117,7 @@ curl -X POST http://<EC2-IP>:5000/analyze \
   --output result.mp4
 
 ### Testing
-# Unit tests are provided for video analysis and API endpoints.
+### Unit tests are provided for video analysis and API endpoints.
 python -m pytest -v
 
 
