@@ -130,3 +130,4 @@ MediaPipe Pose -> https://ai.google.dev/edge/mediapipe/solutions/vision/pose_lan
 Flask Documentation -> https://flask.palletsprojects.com/en/stable/
 
 OpenCV Documentation -> https://docs.opencv.org/4.x/
+
