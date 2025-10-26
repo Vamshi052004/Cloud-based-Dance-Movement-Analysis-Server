@@ -43,7 +43,7 @@ cd dance-movement-analysis
 
 ### 2. Set up a Python virtual environment (optional)
 python -m venv .venv
-# Activate the environment
+### Activate the environment
 .venv\Scripts\activate 
 
 ### Install dependencies
@@ -52,53 +52,54 @@ pip install -r requirements.txt
 
 ### 4. Run the Flask server
 python -m app.app
-# The server will start at:
+### The server will start at:
 http://127.0.0.1:5000
 
 ### 5. Test upload and processing
-# Use the /analyze endpoint to upload a video via POST request.
+### Use the /analyze endpoint to upload a video via POST request.
 curl -F "file=@app/sample_videos/sample_dance.mp4" http://localhost:5000/analyze
 
 ### 6. Docker Setup (Windows Local Test)
-# 6.1 Build Docker image
+### 6.1 Build Docker image
 docker build -t dance-analyzer .
 
-# 6.2 Run Docker container
+### 6.2 Run Docker container
 docker run -p 5000:5000 `
 -v ${PWD}/uploads:/app/uploads `
 -v ${PWD}/outputs:/app/outputs `
   dance-analyzer
-# alternate command to run the Docker container (recommended)
+### alternate command to run the Docker container (recommended)
 docker run dance-analyzer (simplier to execute)
 
 ### 7. Cloud Deployment (Ubuntu on AWS / GCP)
-# 7.1 Update system and install Docker
+### 7.1 Update system and install Docker
 sudo apt update
 sudo apt install -y docker.io
 sudo systemctl enable docker
 sudo systemctl start docker
 sudo usermod -aG docker $USER
 
-# 7.2 check the docker version
+### 7.2 check the docker version
 docker --version
-# 7.3 Clone/copy the repository from the github
+
+### 7.3 Clone/copy the repository from the github
 git clone https://github.com/Vamshi052004/Cloud-based-Dance-Movement-Analysis-Server.git
 
-# 7.4 Build Docker image on Ubuntu
+### 7.4 Build Docker image on Ubuntu
 cd dance-movement-analysis
 sudo docker build -t dance-analyzer .
 
-# 7.5 If any issue occur while building the docker image (Optional if no issues occured)
+### 7.5 If any issue occur while building the docker image (Optional if no issues occured)
 df -h
 sudo docker system prune -a
 sudo docker system df
 sudo apt-get clean
 sudo rm -rf /var/lib/apt/lists/*
 sudo journalctl --vacuum-time=1d
-# rerun the docker image build command after this
+### rerun the docker image build command after this
 
 
-# 7.6 Run container on cloud
+### 7.6 Run container on cloud
 sudo docker run -d -p 5000:5000 \
   -v $(pwd)/uploads:/app/uploads \
   -v $(pwd)/outputs:/app/outputs \
@@ -118,7 +119,6 @@ curl -X POST http://<EC2-IP>:5000/analyze \
 ### Testing
 # Unit tests are provided for video analysis and API endpoints.
 python -m pytest -v
-
 
 
 License
