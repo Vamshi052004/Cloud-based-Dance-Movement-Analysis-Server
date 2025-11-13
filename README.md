@@ -110,11 +110,17 @@ sudo docker build -t dance-analyzer .
 
 ### 7.5 If any issue occur while building the docker image (Optional if no issues occured)
 df -h
+
 sudo docker system prune -a
+
 sudo docker system df
+
 sudo apt-get clean
+
 sudo rm -rf /var/lib/apt/lists/*
+
 sudo journalctl --vacuum-time=1d
+
 ### rerun the docker image build command after this
 
 
