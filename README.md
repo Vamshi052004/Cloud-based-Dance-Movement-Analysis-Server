@@ -62,6 +62,7 @@ python -m venv .venv
 
 ### 3. Install dependencies
 pip install --upgrade pip setuptools wheel
+
 pip install -r requirements.txt
 
 ### 4. Run the Flask server
@@ -90,9 +91,13 @@ curl -X POST \
 ### 7. Cloud Deployment (Ubuntu on AWS)
 ### 7.1 Update system and install Docker
 sudo apt update
+
 sudo apt install -y docker.io
+
 sudo systemctl enable docker
+
 sudo systemctl start docker
+
 sudo usermod -aG docker $USER
 
 ### 7.2 check the docker version
@@ -103,20 +108,29 @@ git clone https://github.com/Vamshi052004/Cloud-based-Dance-Movement-Analysis-Se
 
 ### 7.4 Build Docker image on Ubuntu
 cd dance-movement-analysis
+
 sudo docker build -t dance-analyzer .
 
 ### 7.5 If any issue occur while building the docker image (Optional if no issues occured)
 df -h
+
 sudo docker system prune -a
+
 sudo docker system df
+
 sudo apt-get clean
+
 sudo rm -rf /var/lib/apt/lists/*
+
 sudo journalctl --vacuum-time=1d
+
 ### rerun the docker image build command after this
 
 ### 7.6 Run container
 sudo docker run -d -p 5000:5000 dance-analyzer
+
 (or) alternate one
+
 docker run -p 5000:5000 dance-analyzer # (recommended)
 
 # 8. AWS EC2 Deployment
@@ -124,6 +138,7 @@ docker run -p 5000:5000 dance-analyzer # (recommended)
 After downloading your .pem key:
 ### use these commands:
 chmod 400 dance-server.pem
+
 ssh -i "dance-server.pem" ubuntu@<EC2-PUBLIC-IP>
 
 ### 8.2 Update System
@@ -131,8 +146,11 @@ sudo apt update && sudo apt upgrade -y
 
 ### 8.3 Install Docker and curl in Ubuntu
 sudo apt install docker.io -y
+
 sudo apt install -y curl
+
 sudo systemctl start docker
+
 sudo systemctl enable docker
 
 ### verify the version of the docker
@@ -143,6 +161,7 @@ sudo apt install git -y
 
 ### 8.4 Clone Your Project Inside EC2
 git clone https://github.com/Vamshi052004/Cloud-based-Dance-Movement-Analysis-Server.git
+
 cd Cloud-based-Dance-Movement-Analysis-Server
 
 ### 8.5 Upload Sample Video (from your laptop to EC2)
@@ -153,7 +172,9 @@ sudo docker build -t dance-analyzer .
 
 ### 8.7 Run Docker Container
 sudo docker run -d -p 5000:5000 dance-analyzer
-or 
+
+(or)
+
 sudo docker run -p 5000:5000 dance-analyzer
 
 ### Server now runs at:
