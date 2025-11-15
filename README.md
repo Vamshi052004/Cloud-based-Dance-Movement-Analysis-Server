@@ -1,7 +1,7 @@
 # Dance Movement Analysis — Flask + MediaPipe
 
 ## Overview
-Dance Movement Analysis is a Flask-based web service that allows users to upload short dance videos, detects human body keypoints using [MediaPipe](https://mediapipe.dev/), and returns a processed video with skeleton overlays. It is ideal for dance instructors, choreographers, and anyone interested in analyzing dance movements for learning, training, or performance improvement.
+Dance Movement Analysis is a Flask-based web service that allows users to upload short dance videos, detects human body keypoints using MediaPipe, and returns a processed video with skeleton overlays. It is ideal for dance instructors, choreographers, and anyone interested in analyzing dance movements for learning, training, or performance improvement.
 
 ---
 
