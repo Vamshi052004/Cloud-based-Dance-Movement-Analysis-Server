@@ -71,7 +71,7 @@ python -m app.app
 ### The server will start at:
 http://127.0.0.1:5000
 
-# stop it (Ctrl + C) after executing locally
+### stop it (Ctrl + C) after executing locally
 
 ### 5. Docker Setup (Windows Local Test)
 ### 5.1 Build Docker image
@@ -134,7 +134,7 @@ sudo docker run -d -p 5000:5000 dance-analyzer
 
 docker run -p 5000:5000 dance-analyzer # (recommended)
 
-# 8. AWS EC2 Deployment
+### 8. AWS EC2 Deployment
 ### 8.1 Connect to EC2 Instance (Ubuntu)
 After downloading your .pem key:
 ### use these commands:
@@ -178,7 +178,7 @@ sudo docker run -d -p 5000:5000 dance-analyzer
 
 sudo docker run -p 5000:5000 dance-analyzer
 
-# 9. Test API on EC2 (POST Method)
+### 9. Test API on EC2 (POST Method)
 curl -X POST http://<EC2-IP>:5000/analyze \
   -F "file=@sample_videos/sample_dance.mp4" \
   --output result.mp4
