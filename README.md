@@ -16,23 +16,37 @@ Dance Movement Analysis is a Flask-based web service that allows users to upload
 
 ## Project Structure
 dance-movement-analysis/
+
 ├── app/
+
 │   ├── __init__.py
+
 │   ├── app.py                 # Main Flask application
+
 │   ├── movement_analysis.py   # Video processing and skeleton overlay logic
+
 │   ├── utils.py               # Utility functions (file handling, paths)
+
 │   └── sample_videos/
+
 │       └── sample_dance.mp4   # Sample videos for testing
+
 ├── config/
+
 │   └── settings.py            # Project configuration and environment variables
-├── demo/
-│   └── demo.mp4               # Demo video of 2 minutes
+
 ├── tests/
+
 │   ├── test_analyzer.py       # Unit tests for analyzer
+
 │   └── test_movement.py       # Unit tests for movement analysis
+
 ├── requirements.txt           # Python package dependencies
+
 ├── Dockerfile                 # Docker setup for containerized deployment
+
 ├── .gitignore                 # Ignored files and directories
+
 └── README.md                  # Project documentation
 
 ## Quick Start (Local Setup)
@@ -46,7 +60,7 @@ python -m venv .venv
 ### Activate the environment
 .venv\Scripts\activate 
 
-### Install dependencies
+### 3. Install dependencies
 pip install --upgrade pip setuptools wheel
 pip install -r requirements.txt
 
