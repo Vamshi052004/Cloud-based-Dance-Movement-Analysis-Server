@@ -53,6 +53,7 @@ dance-movement-analysis/
 
 ### 1. Clone the repository
 git clone https://github.com/Vamshi052004/Cloud-based-Dance-Movement-Analysis-Server.git
+
 cd dance-movement-analysis
 
 ### 2. Set up a Python virtual environment (optional)
@@ -177,9 +178,6 @@ sudo docker run -d -p 5000:5000 dance-analyzer
 
 sudo docker run -p 5000:5000 dance-analyzer
 
-### Server now runs at:
-http://<EC2-PUBLIC-IP>:5000
-
 # 9. Test API on EC2 (POST Method)
 curl -X POST http://<EC2-IP>:5000/analyze \
   -F "file=@sample_videos/sample_dance.mp4" \
@@ -188,6 +186,8 @@ curl -X POST http://<EC2-IP>:5000/analyze \
 ### Testing
 ### Unit tests are provided for video analysis and API endpoints.
 python -m pytest -v
+
+
 
 
 License
