@@ -189,7 +189,7 @@ python -m pytest -v
 
 
 
-### References i used for the project
+### References
 MediaPipe Pose -> https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker
 
 Flask Documentation -> https://flask.palletsprojects.com/en/stable/
