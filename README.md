@@ -189,11 +189,7 @@ python -m pytest -v
 
 
 
-
-License
-This project is licensed under the MIT License. See LICENSE for details.
-
-References
+### References i used for the project
 MediaPipe Pose -> https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker
 
 Flask Documentation -> https://flask.palletsprojects.com/en/stable/
