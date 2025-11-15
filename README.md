@@ -166,7 +166,7 @@ git clone https://github.com/Vamshi052004/Cloud-based-Dance-Movement-Analysis-Se
 cd Cloud-based-Dance-Movement-Analysis-Server
 
 ### 8.5 Upload Sample Video (from your laptop to EC2)
-scp -i "dance-server.pem" sample_dance.mp4 ubuntu@<EC2-PUBLIC-IP>:~/Cloud-based-Dance-Movement-Analysis-Server/
+scp -i "dance-server.pem" sample_dance.mp4 ubuntu@(EC2-PUBLIC-IP):~/Cloud-based-Dance-Movement-Analysis-Server/
 
 ### 8.6 Build Docker Image
 sudo docker build -t dance-analyzer .
