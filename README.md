@@ -101,10 +101,11 @@ curl -X POST \
 docker build -t dance-analyzer .
 
 ### 6.2 Run Docker container
-docker run -p 5000:5000 `
--v ${PWD}/uploads:/app/uploads `
--v ${PWD}/outputs:/app/outputs `
+docker run -d -p 5000:5000 \
+  -v $(pwd)/uploads:/app/uploads \
+  -v $(pwd)/outputs:/app/outputs \
   dance-analyzer
+
 ### alternate command to run the Docker container (recommended)
 docker run dance-analyzer (simplier to execute)
 
@@ -156,7 +157,7 @@ sudo docker run -d -p 5000:5000 \
   -v $(pwd)/uploads:/app/uploads \
   -v $(pwd)/outputs:/app/outputs \
   dance-analyzer
->>>>>>> d090c04 (second commit)
+  
 (or) alternate one
 
 docker run -p 5000:5000 dance-analyzer # (recommended)
