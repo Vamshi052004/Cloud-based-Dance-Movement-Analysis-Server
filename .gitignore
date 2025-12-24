@@ -1,0 +1,11 @@
+pycache/
+*.pyc
+*.pyo
+*.pyd
+.env
+.vscode/
+data/
+*.mp4
+demo/demo_video.mp4"venv/" 
+"venv/" 
+"venv/" 
