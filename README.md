@@ -77,7 +77,7 @@ python -m app.app
 ### The server will start at:
 http://127.0.0.1:5000
 
-<<<<<<< HEAD
+
 ### stop it (Ctrl + C) after executing locally
 
 ### 5. Docker Setup (Windows Local Test)
@@ -96,12 +96,6 @@ curl -X POST \
      http://localhost:5000/analyze --output result.mp4
 
 
-### 7. Cloud Deployment (Ubuntu on AWS)
-=======
-### 5. Test upload and processing
-### Use the /analyze endpoint to upload a video via POST request.
-curl -F "file=@app/sample_videos/sample_dance.mp4" http://localhost:5000/analyze
-
 ### 6. Docker Setup (Windows Local Test)
 ### 6.1 Build Docker image
 docker build -t dance-analyzer .
@@ -114,9 +108,10 @@ docker run -p 5000:5000 `
 ### alternate command to run the Docker container (recommended)
 docker run dance-analyzer (simplier to execute)
 
-### 7. Cloud Deployment (Ubuntu on AWS / GCP)
->>>>>>> d090c04 (second commit)
+### 7. Cloud Deployment (Ubuntu on AWS)
+
 ### 7.1 Update system and install Docker
+
 sudo apt update
 
 sudo apt install -y docker.io
@@ -150,18 +145,12 @@ sudo apt-get clean
 sudo rm -rf /var/lib/apt/lists/*
 
 sudo journalctl --vacuum-time=1d
-<<<<<<< HEAD
-=======
-### rerun the docker image build command after this
->>>>>>> d090c04 (second commit)
 
 ### rerun the docker image build command after this
 
 ### 7.6 Run container
 sudo docker run -d -p 5000:5000 dance-analyzer
 
-<<<<<<< HEAD
-=======
 ### 7.6 Run container on cloud
 sudo docker run -d -p 5000:5000 \
   -v $(pwd)/uploads:/app/uploads \
@@ -173,6 +162,7 @@ sudo docker run -d -p 5000:5000 \
 docker run -p 5000:5000 dance-analyzer # (recommended)
 
 ### 8. AWS EC2 Deployment
+
 ### 8.1 Connect to EC2 Instance (Ubuntu)
 After downloading your .pem key:
 ### use these commands:
@@ -226,15 +216,10 @@ curl -X POST http://<EC2-IP>:5000/analyze \
 python -m pytest -v
 
 
-<<<<<<< HEAD
-
 ### References
-=======
-
 
 MediaPipe Pose -> https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker
 
 Flask Documentation -> https://flask.palletsprojects.com/en/stable/
 
 OpenCV Documentation -> https://docs.opencv.org/4.x/
-
