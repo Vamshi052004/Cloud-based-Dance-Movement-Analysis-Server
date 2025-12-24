@@ -23,17 +23,23 @@ dance-movement-analysis/
 
 │   ├── app.py                 # Main Flask application
 
+│   ├── app2.py                 # Main Flask application
+
 │   ├── movement_analysis.py   # Video processing and skeleton overlay logic
 
+│   ├── movement_analysis2.py   
+
 │   ├── utils.py               # Utility functions (file handling, paths)
-
-│   └── sample_videos/
-
-│       └── sample_dance.mp4   # Sample videos for testing
 
 ├── config/
 
 │   └── settings.py            # Project configuration and environment variables
+
+├── temp/
+
+│   └── a1.wav
+
+│   └── a2.wav
 
 ├── tests/
 
@@ -224,11 +230,8 @@ python -m pytest -v
 
 ### References
 =======
-License
-This project is licensed under the MIT License. See LICENSE for details.
 
-References
->>>>>>> d090c04 (second commit)
+
 MediaPipe Pose -> https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker
 
 Flask Documentation -> https://flask.palletsprojects.com/en/stable/
