@@ -55,6 +55,18 @@ def pose_similarity(lm1, lm2):
     dist = np.linalg.norm(p1 - p2, axis=1).mean()
     return (1 / (1 + dist)) * 100
 
+def crop_black_borders(frame, threshold=10):
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    _, thresh = cv2.threshold(gray, threshold, 255, cv2.THRESH_BINARY)
+
+    coords = cv2.findNonZero(thresh)
+    if coords is None:
+        return frame  # fallback
+
+    x, y, w, h = cv2.boundingRect(coords)
+    return frame[y:y+h, x:x+w]
+
+
 def merge_and_analyze(video1, video2, output_path):
     cap1 = cv2.VideoCapture(video1)
     cap2 = cv2.VideoCapture(video2)
@@ -64,19 +76,8 @@ def merge_and_analyze(video1, video2, output_path):
         cap2.get(cv2.CAP_PROP_FPS)
     )) or 25
 
-    w1, h1 = int(cap1.get(3)), int(cap1.get(4))
-    w2, h2 = int(cap2.get(3)), int(cap2.get(4))
-
-    height = min(h1, h2)
-    width = w1 + w2
-
-    out = cv2.VideoWriter(
-        output_path,
-        cv2.VideoWriter_fourcc(*"mp4v"),
-        fps,
-        (width, height)
-    )
-
+    target_height = None
+    out = None
     frames = 0
 
     with mp_pose.Pose(
@@ -92,8 +93,21 @@ def merge_and_analyze(video1, video2, output_path):
             if not r1 or not r2:
                 break
 
-            f1 = cv2.resize(f1, (w1, height))
-            f2 = cv2.resize(f2, (w2, height))
+            # 🔥 REMOVE BLACK PADDING
+            f1 = crop_black_borders(f1)
+            f2 = crop_black_borders(f2)
+
+            # Normalize height
+            if target_height is None:
+                target_height = min(f1.shape[0], f2.shape[0])
+
+            def resize_keep_ratio(img):
+                h, w = img.shape[:2]
+                scale = target_height / h
+                return cv2.resize(img, (int(w * scale), target_height))
+
+            f1 = resize_keep_ratio(f1)
+            f2 = resize_keep_ratio(f2)
 
             p1 = pose.process(cv2.cvtColor(f1, cv2.COLOR_BGR2RGB))
             p2 = pose.process(cv2.cvtColor(f2, cv2.COLOR_BGR2RGB))
@@ -113,6 +127,16 @@ def merge_and_analyze(video1, video2, output_path):
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
 
             merged = np.hstack((f1, f2))
+
+            if out is None:
+                h, w = merged.shape[:2]
+                out = cv2.VideoWriter(
+                    output_path,
+                    cv2.VideoWriter_fourcc(*"mp4v"),
+                    fps,
+                    (w, h)
+                )
+
             out.write(merged)
             frames += 1
 
@@ -121,6 +145,8 @@ def merge_and_analyze(video1, video2, output_path):
     out.release()
 
     return fps, frames
+
+
 
 def process_two_videos(video1, video2, final_output):
     os.makedirs("temp", exist_ok=True)
