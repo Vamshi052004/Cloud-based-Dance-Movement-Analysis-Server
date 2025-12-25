@@ -13,13 +13,13 @@ OUTPUT = os.path.join(BASE, "outputs")
 os.makedirs(UPLOAD, exist_ok=True)
 os.makedirs(OUTPUT, exist_ok=True)
 
-
+# server setup
 @app.route("/", methods=["GET"])
 def health():
     return jsonify({"status": "ok",
                     "message": "Movement Analysis Service is running."})
 
-
+# Video Analysis 
 @app.route("/analyze", methods=["POST"])
 def analyze():
     if "file1" not in request.files or "file2" not in request.files:
